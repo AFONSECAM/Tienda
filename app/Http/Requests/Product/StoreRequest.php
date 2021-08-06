@@ -25,7 +25,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:products|max:150',
-            'image' => 'required|dimensions:min_width=100,min_height=200',
+            // 'image' => 'required|dimensions:min_width=100,min_height=200',
             'sell_price' => 'required',
             'category_id' => 'required|exists:App\Category,id',
             'provider_id' => 'required|exists:App\Provider,id'

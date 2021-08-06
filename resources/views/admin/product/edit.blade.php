@@ -44,6 +44,14 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <strong>Stock</strong>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Q</span>
+                            <input type="number" class="form-control" name="stock" id="stock"
+                                value="{{ $product->stock }}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <strong>Categoría</strong>
                         <select name="category_id" id="category_id" class="form-control">
                             @foreach($categories as $category)
@@ -68,8 +76,23 @@
                         </select>
                     </div>
 
-                    <div class="card-body">
-                        <input type="file" name="picture" id="picture" class="dropify">
+                    <div class="form-group">
+
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{ asset('image/'. $product->image) }}" class="card-img-top">
+                            <div class="card-body">
+                                <button class="btn btn-primary" type="button" data-toggle="collapse"
+                                    data-target="#collapseExample" aria-expanded="false"
+                                    aria-controls="collapseExample">
+                                    Cambiar imagen
+                                </button>
+                            </div>
+                        </div>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+                                <input type="file" name="picture" id="picture" class="dropify">
+                            </div>
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary mr-2">Registrar</button>

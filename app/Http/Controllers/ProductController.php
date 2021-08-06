@@ -11,6 +11,10 @@ use App\Provider;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
@@ -61,11 +65,13 @@ class ProductController extends Controller
             $file = $request->file('picture');
             $image_name = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path("/image"), $image_name);
+            $product->update($request->all() + [
+                'image' => $image_name,
+            ]);
+        } else {
+            $product->update($request->all());
         }
 
-        $product->update($request->all() + [
-            'image' => $image_name,
-        ]);
         return redirect()->route('products.index');
     }
 

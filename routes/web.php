@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\SaleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +24,8 @@ Route::resource('categories', 'CategoryController')->names('categories');
 Route::resource('clients', 'ClientController')->names('clients');
 Route::resource('providers', 'ProviderController')->names('providers');
 Route::resource('products', 'ProductController')->names('products');
+Route::resource('purchases', 'PurchaseController')->names('purchases');
+Route::resource('sales', 'SaleController')->names('sales');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Purchase extends Model
 {
     protected $fillable = [
-        'purchase_date', 'tax', 'total', 'status', 'picture', 'provider_id', 'user_id'
+        'purchase_date', 'impuesto', 'total', 'status', 'picture', 'provider_id', 'user_id'
     ];
 
     public function user()

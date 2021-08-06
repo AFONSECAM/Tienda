@@ -16,10 +16,10 @@ class CreatePurchasesTable extends Migration
         Schema::create('purchases', function (Blueprint $table) {
             $table->id();
             $table->dateTime('purchase_date');
-            $table->decimal('tax');
+            $table->integer('impuesto');
             $table->decimal('total');
             $table->enum('status', ['VALID', 'CANCELED'])->default('VALID');
-            $table->string('picture');
+            $table->string('picture')->nullable();
             $table->unsignedBigInteger('provider_id');
             $table->foreign('provider_id')->references('id')->on('providers');
             $table->unsignedBigInteger('user_id');

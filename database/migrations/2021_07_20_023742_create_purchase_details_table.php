@@ -17,8 +17,8 @@ class CreatePurchaseDetailsTable extends Migration
             $table->id();
             $table->integer('quantity');
             $table->decimal('price');
-            $table->unsignedBigInteger('shopping_id');
-            $table->foreign('shopping_id')->references('id')->on('purchases');
+            $table->unsignedBigInteger('purchase_id');
+            $table->foreign('purchase_id')->references('id')->on('purchases');
             $table->unsignedBigInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();

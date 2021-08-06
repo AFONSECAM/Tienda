@@ -7,10 +7,17 @@ use App\Purchase;
 use Illuminate\Http\Request;
 use App\Http\Requests\Purchase\StoreRequest;
 use App\Http\Requests\Purchase\UpdateRequest;
+use App\Product;
 use App\Provider;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
@@ -22,13 +29,17 @@ class PurchaseController extends Controller
     public function create()
     {
         $providers = Provider::get();
-        return view('admin.purchase.create', compact('providers'));
+        $products = Product::get();
+        return view('admin.purchase.create', compact('providers', 'products'));
     }
 
 
     public function store(StoreRequest $request)
     {
-        $purchase = Purchase::create($request->all());
+        $purchase = Purchase::create($request->all() + [
+            'purchase_date' => Carbon::now('America/Bogota'),
+            'user_id' => Auth::user()->id,
+        ]);
         foreach ($request->product_id as $key => $product) {
             $results[] = array("product_id" => $request->product_id[$key], "quantity" => $request->quantity[$key], "price" => $request->price[$key]);
         }
@@ -39,14 +50,19 @@ class PurchaseController extends Controller
 
     public function show(Purchase $purchase)
     {
-        return view('admin.purchase.show', compact('purchase'));
+        $subtotal = 0;
+        $purchaseDetails = $purchase->purchaseDetails;
+        foreach ($purchaseDetails as $purchaseDetail) {
+            $subtotal += $purchaseDetail->quantity * $purchaseDetail->price;
+        }
+        return view('admin.purchase.show', compact('purchase', 'purchaseDetails', 'subtotal'));
     }
 
-    public function edit(Purchase $purchase)
-    {
-        $providers = Provider::get();
-        return view('admin.purchase.create', compact('purchase', 'providers'));
-    }
+    // public function edit(Purchase $purchase)
+    // {
+    //     $providers = Provider::get();
+    //     return view('admin.purchase.edit', compact('purchase', 'providers'));
+    // }
 
 
     public function update(UpdateRequest $request, Purchase $purchase)
