@@ -8,7 +8,10 @@ use App\Sale;
 use Illuminate\Http\Request;
 use App\Http\Requests\Sale\StoreRequest;
 use App\Http\Requests\Sale\UpdateRequest;
+use App\Product;
 use App\Provider;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class SaleController extends Controller
 {
@@ -27,13 +30,17 @@ class SaleController extends Controller
     public function create()
     {
         $clients = Client::get();
-        return view('admin.sale.create', compact('clients'));
+        $products = Product::get();
+        return view('admin.sale.create', compact('clients', 'products'));
     }
 
 
     public function store(StoreRequest $request)
     {
-        $sale = Sale::create($request->all());
+        $sale = Sale::create($request->all() + [
+            'sale_date' => Carbon::now('America/Bogota'),
+            'user_id' => Auth::user()->id
+        ]);
         foreach ($request->product_id as $key => $product) {
             $results[] = array("product_id" => $request->product_id[$key], "quantity" => $request->quantity[$key], "price" => $request->price[$key], "discount" => $request->discount[$key]);
         }

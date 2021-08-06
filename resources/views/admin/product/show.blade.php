@@ -91,7 +91,7 @@
                                         <hr>
                                         <strong><i class="fa fa-usd mr-1"></i> Precio venta</strong>
                                         <p class="text-muted">
-                                            {{$product->sell_price}}
+                                            $ {{ number_format($product->sell_price,0) }}
                                         </p>
                                     </div>
                                     <div class="form-group col-md-6">

@@ -50006,8 +50006,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/andres/Documentos/Laravel Projects/tienda/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/andres/Documentos/Laravel Projects/tienda/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\andres.fonseca\Documents\Laravel\Tienda\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\andres.fonseca\Documents\Laravel\Tienda\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
