@@ -4,7 +4,7 @@
             <label for="client_id">Cliente</label>
             <select class="form-control" name="client_id" id="client_id">
                 @foreach($clients as $client)
-                    <option value="{{ $client->id }}">{{ $client->name }}</option>
+                <option value="{{ $client->id }}">{{ $client->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -18,7 +18,8 @@
             <select class="form-control" name="product_id" id="product_id">
                 <option value="" disabled selected>Selecccione un producto</option>
                 @foreach($products as $product)
-                    <option value="{{ $product->id }}_{{ $product->stock }}_{{ $product->sell_price }}">{{ $product->name }}</option>
+                <option value="{{ $product->id }}_{{ $product->stock }}_{{ $product->sell_price }}">{{ $product->name }}
+                </option>
                 @endforeach
             </select>
         </div>
@@ -54,7 +55,7 @@
     <div class="form-group col-md-4">
         <div class="form-group">
             <label for="price">Descuento</label>
-            <input type="number" class="form-control form-control-sm" name="discount" id="discount">
+            <input type="number" class="form-control form-control-sm" name="discount" id="discount" value="0">
         </div>
     </div>
 

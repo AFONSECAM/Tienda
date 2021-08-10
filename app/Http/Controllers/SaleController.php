@@ -10,6 +10,7 @@ use App\Http\Requests\Sale\StoreRequest;
 use App\Http\Requests\Sale\UpdateRequest;
 use App\Product;
 use App\Provider;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,7 +52,12 @@ class SaleController extends Controller
 
     public function show(Sale $sale)
     {
-        return view('admin.sale.show', compact('sale'));
+        $subtotal = 0;
+        $saleDetails = $sale->saleDetails;
+        foreach ($saleDetails as $saleDetail) {
+            $subtotal += $saleDetail->quantity * $saleDetail->price - (($saleDetail->quantity * $saleDetail->price) - $saleDetail->price * 100);
+        }
+        return view('admin.sale.show', compact('sale', 'subtotal', 'saleDetails'));
     }
 
     public function edit(Sale $sale)
@@ -71,5 +77,16 @@ class SaleController extends Controller
     {
         $sale->delete();
         return redirect()->route('sales.index');
+    }
+
+    public function pdf(Sale $sale)
+    {
+        $subtotal = 0;
+        $saleDetails = $sale->saleDetails;
+        foreach ($saleDetails as $saleDetail) {
+            $subtotal += $saleDetail->quantity * $saleDetail->price - (($saleDetail->quantity * $saleDetail->price) - $saleDetail->price * 100);
+        }
+        $pdf = PDF::loadView('admin.sale.pdf', compact('sale', 'subtotal', 'saleDetails'));
+        return $pdf->stream('Reporte_de_compra_' . $sale->id . '.pdf');
     }
 }

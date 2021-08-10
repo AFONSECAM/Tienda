@@ -9,6 +9,7 @@ use App\Http\Requests\Purchase\StoreRequest;
 use App\Http\Requests\Purchase\UpdateRequest;
 use App\Product;
 use App\Provider;
+use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -75,5 +76,16 @@ class PurchaseController extends Controller
     {
         $purchase->delete();
         return redirect()->route('purchases.index');
+    }
+
+    public function pdf(Purchase $purchase)
+    {
+        $subtotal = 0;
+        $purchaseDetails = $purchase->purchaseDetails;
+        foreach ($purchaseDetails as $purchaseDetail) {
+            $subtotal += $purchaseDetail->quantity * $purchaseDetail->price;
+        }
+        $pdf = PDF::loadView('admin.purchase.pdf', compact('purchase', 'subtotal', 'purchaseDetails'));
+        return $pdf->stream('Reporte_de_compra_' . $purchase->id . '.pdf');
     }
 }

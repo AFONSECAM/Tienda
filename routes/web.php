@@ -26,6 +26,10 @@ Route::resource('providers', 'ProviderController')->names('providers');
 Route::resource('products', 'ProductController')->names('products');
 Route::resource('purchases', 'PurchaseController')->names('purchases');
 Route::resource('sales', 'SaleController')->names('sales');
+
+Route::get('purchases/pdf/{purchase}', 'PurchaseController@pdf')->name('purchases.pdf');
+Route::get('sales/pdf/{sale}', 'SaleController@pdf')->name('sales.pdf');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

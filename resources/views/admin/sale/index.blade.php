@@ -69,10 +69,10 @@
                                             href="{{route('categories.edit', $sale)}}" title="Editar">
                                             <i class="far fa-edit"></i>
                                         </a> -->
-                                        <a class="jsgrid-button jsgrid-edit-button" href=""><i
-                                                class="far fa-file-pdf"></i></a>
-                                        <a class="jsgrid-button jsgrid-edit-button" href=""><i
-                                                class="fas fa-print"></i></a>
+                                        <a class="jsgrid-button jsgrid-edit-button"
+                                            href="{{ route('sales.pdf', $sale)}}"><i class="far fa-file-pdf"></i></a>
+                                        <a class="jsgrid-button jsgrid-edit-button"
+                                            href="{{ route('sales.pdf', $sale)}}"><i class="fas fa-print"></i></a>
                                         <a class="jsgrid-button jsgrid-edit-button"
                                             href="{{ route('sales.show', $sale) }}"><i class="far fa-eye"></i></a>
 

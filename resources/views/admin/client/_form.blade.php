@@ -9,7 +9,6 @@
         <div class="form-group">
             <label for="email">Correo electrónico</label>
             <input type="email" class="form-control" name="email" id="email" aria-describedby="helpId">
-            <small id="helpId" class="form-text text-muted">Este campo es opcional.</small>
         </div>
     </div>
 </div>
@@ -31,7 +30,6 @@
         <div class="form-group">
             <label for="phone">Teléfono \ Celular</label>
             <input type="number" class="form-control" name="phone" id="phone" aria-describedby="helpId">
-            <small id="helpId" class="form-text text-muted">Este campo es opcional.</small>
         </div>
     </div>
     <div class="form-group col-md-12">
