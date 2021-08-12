@@ -39,12 +39,13 @@
                             required>
                     </div>
 
+                    @include('admin.user._form')
                     <!-- <div class="form-group">
                         <strong for="">Contraseña</strong>
                         <input type="password" name="password" id="password" class="form-control"
                             value="{{ $user->password }}" required>
                     </div> -->
-                    @include('admin.user._form')
+
                     <button type="submit" class="btn btn-primary mr-2">Actualizar</button>
                     <a href="{{ route('users.index') }}" class="btn btn-light">Cancelar</a>
 

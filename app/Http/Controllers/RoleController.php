@@ -8,34 +8,28 @@ use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:purchases.index')->only(['index']);
+        $this->middleware('can:purchases.create')->only(['create', 'store']);
+        $this->middleware('can:purchases.edit')->only(['edit', 'update']);
+        $this->middleware('can:purchases.show')->only(['show']);
+        $this->middleware('can:purchases.destroy')->only(['destroy']);
+    }
+
     public function index()
     {
         $roles = Role::get();
         return view('admin.role.index', compact('roles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $permissions = Permission::get();
         return view('admin.role.create', compact('permissions'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $role = Role::create($request->all());

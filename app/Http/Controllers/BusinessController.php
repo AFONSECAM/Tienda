@@ -8,6 +8,13 @@ use App\Business;
 
 class BusinessController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:roles.index')->only(['index']);
+        $this->middleware('can:roles.edit')->only(['update']);
+    }
+
     public function index()
     {
         $business = Business::get();
