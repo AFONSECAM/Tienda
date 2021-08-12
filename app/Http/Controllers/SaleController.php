@@ -89,4 +89,15 @@ class SaleController extends Controller
         $pdf = PDF::loadView('admin.sale.pdf', compact('sale', 'subtotal', 'saleDetails'));
         return $pdf->stream('Reporte_de_compra_' . $sale->id . '.pdf');
     }
+
+    public function changeStatus(Sale $sale)
+    {
+        if ($sale->status == "VALID") {
+            $sale->update(['status' => "CANCELED"]);
+            return redirect()->back();
+        } else {
+            $sale->update(['status' => "VALID"]);
+            return redirect()->back();
+        }
+    }
 }

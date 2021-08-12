@@ -30,6 +30,29 @@ Route::resource('sales', 'SaleController')->names('sales');
 Route::get('purchases/pdf/{purchase}', 'PurchaseController@pdf')->name('purchases.pdf');
 Route::get('sales/pdf/{sale}', 'SaleController@pdf')->name('sales.pdf');
 
+//Para la subida de archivos a las compras
+Route::get('purchases/upload/{purchase}', 'PurchaseController@uploadFile')->name('upload.purchases');
+
+
+//Para cambiar el status
+// Route::resource('changeStatus/products/{product}', 'ProductController@changeStatus')->names('change.status.products');
+// Route::resource('changeStatus/purchases/{purchase}', 'PurchaseController@changeStatus')->names('change.status.purchases');
+// Route::resource('changeStatus/sales/{sale}', 'SaleController@changeStatus')->names('change.status.sales');
+
+
+//Rutas para los reportes
+Route::get('sales/reports_day', 'ReportController@reports_day')->name('reports.day');
+Route::get('sales/reports_date', 'ReportController@reports_date')->name('reports.date');
+
+Route::post('sales/report_results', 'ReportController@report_results')->name('report.results');
+
+
+
+Route::resource('users', 'UserController')->names('users');
+Route::resource('roles', 'RoleController')->names('roles');
+
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
